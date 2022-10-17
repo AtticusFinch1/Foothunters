@@ -1,0 +1,11 @@
+
+pytest 
+python-dotenv
+selenium
+webdriver-manager
+requests
+beautifulsoup4
+allure-pytest
+allure-python-commons
+pyautogui
+python-xlib
