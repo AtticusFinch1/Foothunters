@@ -9,3 +9,4 @@ allure-pytest
 allure-python-commons
 pyautogui
 python-xlib
+PyVirtualDisplay
