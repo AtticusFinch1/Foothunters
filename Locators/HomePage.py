@@ -4,8 +4,8 @@ class HomePage_locators:
     profile_icon = (By.CSS_SELECTOR, ".q-avatar.text-white.q-chip--colored")
     logout_btn = (By.XPATH, "//div[normalize-space()='Logout']")
 
-    like_btn = (By.CSS_SELECTOR, "div[class='q-page-container'] button:nth-child(1)")
-    follow_btn = (By.CSS_SELECTOR, "div[class='q-page-container'] button:nth-child(2)")
+    like_btn = (By.XPATH, "//i[@role='img'][normalize-space()='thumb_up_off_alt']")
+    follow_btn = (By.XPATH, "//i[normalize-space()='person_add_alt_1']")
 
     moderation_btn = (By.XPATH, "//i[normalize-space()='dashboard']")
     moderation_page = (By.XPATH, "//i[normalize-space()='chrome_reader_mode']")
