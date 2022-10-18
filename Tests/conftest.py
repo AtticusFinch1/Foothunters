@@ -10,9 +10,9 @@ def init_driver(request):
     """ display and --headless is used only for github actions """
     # display = Display(visible=0, size=(800, 800))  
     # display.start()
-    # options = Options()
-    # options.add_argument('--headless')
-    # options.add_argument('--disable-gpu')
-    web_driver=webdriver.Chrome(service=Service(ChromeDriverManager().install()))
+    options = Options()
+    options.add_argument('--headless')
+    options.add_argument('--disable-gpu')
+    web_driver=webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
     request.cls.driver=web_driver
     yield
