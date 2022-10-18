@@ -1,3 +1,4 @@
+from subprocess import TimeoutExpired
 from selenium.webdriver import ActionChains
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
@@ -34,7 +35,7 @@ class BasePage(TestData):
     def do_send_keys(self,by_locator,text):
         try:
             element=WebDriverWait(self.driver, 10).until(
-                    EC.presence_of_element_located(by_locator)
+                    EC.visibility_of_element_located(by_locator)
                 )
             return element.send_keys(text)
         except NoSuchElementException:

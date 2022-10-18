@@ -24,3 +24,5 @@ class TestData:
 
     LOGIN_PAGE_ERROR_MESSAGE = "Invalid email or password."
     TEST_MESSAGE = "Test Message"
+
+    HOME_PAGE_TITLE = "Website for soccer players, agents and fans | VVPPlayers"

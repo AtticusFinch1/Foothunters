@@ -1,4 +1,3 @@
-
 pytest 
 python-dotenv
 selenium
@@ -10,3 +9,5 @@ allure-python-commons
 pyautogui
 python-xlib
 PyVirtualDisplay
+python-10minutemail
+minuteinbox-py
