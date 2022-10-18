@@ -17,7 +17,7 @@ class BasePage(TestData):
     def do_click(self,by_locator):
         try:
             element=WebDriverWait(self.driver, 20).until(
-                EC.element_to_be_clickable(by_locator)  
+                EC.presence_of_element_located(by_locator)  
             )
             return element.click()
         except NoSuchElementException:
