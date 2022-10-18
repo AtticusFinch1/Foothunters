@@ -66,3 +66,14 @@ class generalActions():
             except KeyError:
                 print("No such key")
             return id_notifications
+
+    def new_players_all(self):
+        response = requests.post(
+            TestData.BASE_URL + "api/app/present", verify=False)
+        new_users = (response.json()["users"]["new"])
+        new_users_list = {}
+        for i in range(len(new_users)):
+            username = (new_users[i]["username"])
+            lastName = (new_users[i]["profile"]["lastName"])
+            new_users_list[username] = lastName
+        return new_users_list

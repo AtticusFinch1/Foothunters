@@ -11,3 +11,4 @@ python-xlib
 PyVirtualDisplay
 python-10minutemail
 minuteinbox-py
+Counter

@@ -15,3 +15,24 @@ class ActionsHomePage(BasePage):
         self.do_click(HomePage_locators.like_btn)
         self.do_click(HomePage_locators.follow_btn)
         LoginPage.do_logout(self)
+
+    def get_filter_data(self):
+        client = requests.Session()
+        all_players_data = {}
+        data_all = []  # get list of objects with id, gender, username
+        for i in range(0, 6):
+            r = client.post(TestData.BASE_URL + 'api/players/find', data={"page": i + 1, "type": "all"}, verify=False)
+            players_all = r.json()["players"]["data"]
+            for j in range(len(players_all)):
+                id = players_all[j]["id"]
+                all_players_data["id"] = id
+                username = players_all[j]["profile"]["username"]
+                all_players_data["username"] = username
+                gender = players_all[j]["profile"]["gender"]
+                all_players_data["gender"] = gender
+                data_all.append({
+                    "id": all_players_data["id"],
+                    "username": all_players_data["username"],
+                    "gender": all_players_data["gender"]
+                })
+        return data_all
