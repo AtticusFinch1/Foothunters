@@ -13,6 +13,7 @@ from dotenv import load_dotenv
 import os
 import time
 import json
+import random
 
 
 class Test_HomePage(BaseTest):
@@ -22,6 +23,8 @@ class Test_HomePage(BaseTest):
         self.loginPage = LoginPage(self.driver)
         self.homePage = HomePage(self.driver)
         self.loginPage.do_login(os.getenv('LOGIN_FAN'), os.getenv('PASSWORD'))
+        BasePage.wait_for_page_load(
+            self, HomePage_locators.precense_of_home_page_el)
         self.homePage.valid_notification(os.getenv('PLAYER_USERNAME'))
         self.loginPage.do_login(
             os.getenv('LOGIN_PLAYER'), os.getenv('PASSWORD'))
@@ -33,3 +36,30 @@ class Test_HomePage(BaseTest):
         # print(fb_cookie)
         # followers_list = generalActions.get_followers_ids(self, fb_cookie)
         # assert follower_id in followers_list
+
+    # Search player by username and compare with last name in search results
+    def test_search_profile(self):
+        self.loginPage = LoginPage(self.driver)
+        self.homePage = HomePage(self.driver)
+        self.loginPage.do_login(
+            os.getenv('PLAYER_USERNAME'), os.getenv('PASSWORD'))
+        BasePage.wait_for_page_load(
+            self, HomePage_locators.precense_of_home_page_el)
+        response = generalActions.new_players_all(self)
+        random_user = random.choice(list(response.items()))
+        random_username = random_user[0]
+        random_lastname = random_user[1]
+        self.homePage.search_profile(random_username)
+        time.sleep(2)
+        self.driver.execute_script(
+            "window.scrollTo(0, document.body.scrollHeight)")
+        time.sleep(2)
+        try:
+            search_name = self.driver.find_elements(
+                By.XPATH, "//span[@class='text-h6 q-mt-md text-weight-medium']")
+            search_results = search_name[0].text
+            print("random_user, ", random_user,
+                  "search_results: ", search_results)
+            assert random_lastname in search_results
+        except:
+            print("Search param is not found.")
