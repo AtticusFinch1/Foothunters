@@ -1,3 +1,4 @@
+from subprocess import TimeoutExpired
 from selenium.webdriver import ActionChains
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
@@ -15,7 +16,7 @@ class BasePage(TestData):
 
     def do_click(self,by_locator):
         try:
-            element=WebDriverWait(self.driver, 10).until(
+            element=WebDriverWait(self.driver, 20).until(
                 EC.element_to_be_clickable(by_locator)  
             )
             return element.click()
@@ -24,7 +25,7 @@ class BasePage(TestData):
 
     def do_clear(self,by_locator):
         try:
-            element=WebDriverWait(self.driver, 10).until(
+            element=WebDriverWait(self.driver, 20).until(
                     EC.presence_of_element_located(by_locator)
                 )
             return element.clear()
@@ -33,8 +34,8 @@ class BasePage(TestData):
 
     def do_send_keys(self,by_locator,text):
         try:
-            element=WebDriverWait(self.driver, 10).until(
-                    EC.presence_of_element_located(by_locator)
+            element=WebDriverWait(self.driver, 20).until(
+                    EC.visibility_of_element_located(by_locator)
                 )
             return element.send_keys(text)
         except NoSuchElementException:
@@ -46,14 +47,14 @@ class BasePage(TestData):
 
     def is_visible(self,by_locator):
         try:
-            element=WebDriverWait(self.driver,10).until(EC.visibility_of_element_located(by_locator))
+            element=WebDriverWait(self.driver,20).until(EC.visibility_of_element_located(by_locator))
             return bool(element)
         except ElementNotVisibleException:
             print("Element is not visible")
 
     def do_find_elements(self, by_locator):
         try:
-            elements = WebDriverWait(self.driver, 10).until(EC.presence_of_all_elements_located(by_locator))
+            elements = WebDriverWait(self.driver, 20).until(EC.presence_of_all_elements_located(by_locator))
             return elements
         except ElementNotVisibleException:
             print("Element is not visible")

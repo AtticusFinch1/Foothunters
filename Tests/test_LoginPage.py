@@ -20,7 +20,7 @@ class Test_LoginPage(BaseTest):
     @pytest.mark.parametrize('username, password, expected', [
         pytest.param('', '', TestData.LOGIN_PAGE_ERROR_MESSAGE),
         # pytest.param('', TestData.PASSWORD, TestData.LOGIN_PAGE_ERROR_MESSAGE),
-        pytest.param(TestData.PLAYER_USERNAME, '', TestData.LOGIN_PAGE_ERROR_MESSAGE),
+        # pytest.param(TestData.PLAYER_USERNAME, '', TestData.LOGIN_PAGE_ERROR_MESSAGE),
         pytest.param('test', TestData.PASSWORD, TestData.LOGIN_PAGE_ERROR_MESSAGE),
         pytest.param(TestData.PLAYER_USERNAME, 'test', TestData.LOGIN_PAGE_ERROR_MESSAGE),
         pytest.param('test', 'test', TestData.LOGIN_PAGE_ERROR_MESSAGE),
