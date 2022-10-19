@@ -29,6 +29,7 @@ class Test_HomePage(BaseTest):
         self.loginPage.do_login(
             os.getenv('LOGIN_PLAYER'), os.getenv('PASSWORD'))
         time.sleep(2)
+        self.loginPage.do_logout()
         # follower_id = generalActions.get_user_id(
         #     self, os.getenv('PLAYER_USERNAME'))
         # fb_session_cookie = (self.driver.get_cookies())
@@ -42,7 +43,7 @@ class Test_HomePage(BaseTest):
         self.loginPage = LoginPage(self.driver)
         self.homePage = HomePage(self.driver)
         self.loginPage.do_login(
-            os.getenv('PLAYER_USERNAME'), os.getenv('PASSWORD'))
+            os.getenv('LOGIN_PLAYER'), os.getenv('PASSWORD'))
         BasePage.wait_for_page_load(
             self, HomePage_locators.precense_of_home_page_el)
         response = generalActions.new_players_all(self)
@@ -63,3 +64,24 @@ class Test_HomePage(BaseTest):
             assert random_lastname in search_results
         except:
             print("Search param is not found.")
+        self.loginPage.do_logout()
+
+    def test_filter_profile(self):
+        self.loginPage = LoginPage(self.driver)
+        self.homePage = HomePage(self.driver)
+        self.loginPage.do_login(
+            os.getenv('LOGIN_PLAYER'), os.getenv('PASSWORD'))
+        BasePage.wait_for_page_load(
+            self, HomePage_locators.precense_of_home_page_el)
+        self.driver.get(TestData.BASE_URL + "players/")
+        time.sleep(1)
+        position = ActionsHomePage.get_filter_data(self)
+        response = len(position)
+        BasePage.scroll_down(self, 5)
+        self.homePage.filter_in_all_players()
+        players_count = self.driver.find_elements(
+            By.CSS_SELECTOR, ".q-btn.q-btn-item.non-selectable.no-outline.q-btn--standard.q-btn--rectangle.q-btn--rounded.q-btn--actionable.q-focusable.q-hoverable.q-btn--no-uppercase.q-btn--gradient.gradient.q-py-none.q-px-xl.q-my-md")
+        print("players count actual", len(players_count))
+        print("players count expected", response)
+        self.loginPage.do_logout()
+        # assert players_count == response
