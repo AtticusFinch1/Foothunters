@@ -42,7 +42,7 @@ class Test_HomePage(BaseTest):
         self.loginPage = LoginPage(self.driver)
         self.homePage = HomePage(self.driver)
         self.loginPage.do_login(
-            os.getenv('PLAYER_USERNAME'), os.getenv('PASSWORD'))
+            os.getenv('LOGIN_PLAYER'), os.getenv('PASSWORD'))
         BasePage.wait_for_page_load(
             self, HomePage_locators.precense_of_home_page_el)
         response = generalActions.new_players_all(self)
