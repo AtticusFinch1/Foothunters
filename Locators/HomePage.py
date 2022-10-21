@@ -51,7 +51,7 @@ class HomePage_locators:
 
     # Chat
 
-    start_chat_button = (By.XPATH, "//span[normalize-space()='Start chat']")
+    start_chat_button = (By.XPATH, "//button[@class='q-btn q-btn-item non-selectable no-outline q-btn--outline q-btn--rectangle q-btn--rounded q-btn--actionable q-focusable q-hoverable q-btn--no-uppercase q-btn--gradient gradient q-ml-auto profile__action']")
     message_input = (By.XPATH, "//textarea[@placeholder='Message']")
     send_button = (By.XPATH, "//button[@class='q-btn q-btn-item non-selectable no-outline q-btn--unelevated q-btn--round q-btn--actionable q-focusable q-hoverable q-btn--no-uppercase shadow-0 bg-white']//span[@class='q-btn__content text-center col items-center q-anchor--skip justify-center row']")
     message_btn = (By.XPATH, "//span[normalize-space()='Messages']")
