@@ -57,4 +57,4 @@ class HomePage_locators:
     message_btn = (By.XPATH, "//span[normalize-space()='Messages']")
     message_receiver = (By.CSS_SELECTOR, ".roomItem__name.text-body1")
     message_content = (By.CSS_SELECTOR, ".lastMessage__text.ellipsis")
-    
+
