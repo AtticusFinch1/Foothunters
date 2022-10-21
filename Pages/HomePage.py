@@ -46,9 +46,8 @@ class HomePage(BasePage):
         return ({"players_male":gender_counter_male, "players_female":gender_counter_female, "players_found":players_found})
 
     def send_message(self, message):
-        time.sleep(2)
+        time.sleep(5)
         self.do_click(HomePage_locators.start_chat_button)
-        # self.do_click(HomePage_locators.message_input)
         self.do_send_keys(HomePage_locators.message_input, message)
         self.do_click(HomePage_locators.send_button)
 
