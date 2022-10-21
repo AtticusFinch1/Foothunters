@@ -41,6 +41,7 @@ class Test_HomePage(BaseTest):
     def test_search_profile(self):
         self.loginPage = LoginPage(self.driver)
         self.homePage = HomePage(self.driver)
+        time.sleep(2)
         self.loginPage.do_login(
             os.getenv('LOGIN_PLAYER'), os.getenv('PASSWORD'))
         BasePage.wait_for_page_load(
@@ -68,6 +69,7 @@ class Test_HomePage(BaseTest):
     def test_filter_profile(self):
         self.loginPage = LoginPage(self.driver)
         self.homePage = HomePage(self.driver)
+        time.sleep(2)
         self.loginPage.do_login(
             os.getenv('LOGIN_PLAYER'), os.getenv('PASSWORD'))
         BasePage.wait_for_page_load(
@@ -88,6 +90,7 @@ class Test_HomePage(BaseTest):
     def test_filter_profile_gender(self):
         self.loginPage = LoginPage(self.driver)
         self.homePage = HomePage(self.driver)
+        time.sleep(2)
         self.loginPage.do_login(
             os.getenv('LOGIN_PLAYER'), os.getenv('PASSWORD'))
         BasePage.wait_for_page_load(
@@ -101,6 +104,7 @@ class Test_HomePage(BaseTest):
     def test_messenger(self):
         self.loginPage = LoginPage(self.driver)
         self.homePage = HomePage(self.driver)
+        time.sleep(2)
         self.loginPage.do_login(os.getenv('LOGIN_FAN'), os.getenv('PASSWORD'))
         BasePage.wait_for_page_load(
             self, HomePage_locators.precense_of_home_page_el)
