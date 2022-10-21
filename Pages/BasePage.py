@@ -17,7 +17,7 @@ class BasePage(TestData):
     def do_click(self,by_locator):
         try:
             element=WebDriverWait(self.driver, 20).until(
-                EC.presence_of_element_located(by_locator)  
+                EC.visibility_of_element_located(by_locator)  
             )
             return element.click()
         except NoSuchElementException:
@@ -26,7 +26,7 @@ class BasePage(TestData):
     def do_clear(self,by_locator):
         try:
             element=WebDriverWait(self.driver, 20).until(
-                    EC.presence_of_element_located(by_locator)
+                    EC.visibility_of_element_located(by_locator)
                 )
             return element.clear()
         except NoSuchElementException:
@@ -80,7 +80,7 @@ class BasePage(TestData):
         actions.move_to_element(element).perform()
 
     @contextmanager
-    def wait_for_page_load(self, element, timeout=10):
+    def wait_for_page_load(self, element, timeout=20):
         try:
             element_present = EC.presence_of_element_located(element)
             WebDriverWait(self.driver, timeout).until(element_present)

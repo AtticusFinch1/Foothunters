@@ -77,3 +77,5 @@ class generalActions():
             lastName = (new_users[i]["profile"]["lastName"])
             new_users_list[username] = lastName
         return new_users_list
+
+    

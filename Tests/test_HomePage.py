@@ -7,7 +7,6 @@ from Actions.GeneralActions import generalActions
 from Pages.HomePage import HomePage
 from Config.config import TestData
 
-
 from selenium.webdriver.common.by import By
 from dotenv import load_dotenv
 import os
@@ -29,6 +28,7 @@ class Test_HomePage(BaseTest):
         self.loginPage.do_login(
             os.getenv('LOGIN_PLAYER'), os.getenv('PASSWORD'))
         time.sleep(2)
+        self.loginPage.do_logout()
         # follower_id = generalActions.get_user_id(
         #     self, os.getenv('PLAYER_USERNAME'))
         # fb_session_cookie = (self.driver.get_cookies())
@@ -42,7 +42,7 @@ class Test_HomePage(BaseTest):
         self.loginPage = LoginPage(self.driver)
         self.homePage = HomePage(self.driver)
         self.loginPage.do_login(
-            os.getenv('PLAYER_USERNAME'), os.getenv('PASSWORD'))
+            os.getenv('LOGIN_PLAYER'), os.getenv('PASSWORD'))
         BasePage.wait_for_page_load(
             self, HomePage_locators.precense_of_home_page_el)
         response = generalActions.new_players_all(self)
@@ -63,6 +63,7 @@ class Test_HomePage(BaseTest):
             assert random_lastname in search_results
         except:
             print("Search param is not found.")
+        self.loginPage.do_logout()
 
     def test_filter_profile(self):
         self.loginPage = LoginPage(self.driver)
@@ -81,4 +82,35 @@ class Test_HomePage(BaseTest):
             By.CSS_SELECTOR, ".q-btn.q-btn-item.non-selectable.no-outline.q-btn--standard.q-btn--rectangle.q-btn--rounded.q-btn--actionable.q-focusable.q-hoverable.q-btn--no-uppercase.q-btn--gradient.gradient.q-py-none.q-px-xl.q-my-md")
         print("players count actual", len(players_count))
         print("players count expected", response)
+        self.loginPage.do_logout()
         # assert players_count == response
+
+    def test_filter_profile_gender(self):
+        self.loginPage = LoginPage(self.driver)
+        self.homePage = HomePage(self.driver)
+        self.loginPage.do_login(
+            os.getenv('LOGIN_PLAYER'), os.getenv('PASSWORD'))
+        BasePage.wait_for_page_load(
+            self, HomePage_locators.precense_of_home_page_el)
+        self.driver.get(TestData.BASE_URL + "players/")
+        time.sleep(1)
+        response = self.homePage.filter_profile_gender()
+        # assert response['players_male'] == response["players_found"][:2]
+        self.loginPage.do_logout()
+
+    def test_messenger(self):
+        self.loginPage = LoginPage(self.driver)
+        self.homePage = HomePage(self.driver)
+        self.loginPage.do_login(os.getenv('LOGIN_FAN'), os.getenv('PASSWORD'))
+        BasePage.wait_for_page_load(
+            self, HomePage_locators.precense_of_home_page_el)
+        self.driver.get(TestData.BASE_URL + TestData.USERNAME_PLAYER)
+        self.homePage.send_message(TestData.TEST_MESSAGE)
+        self.driver.get(TestData.BASE_URL_LOGIN)
+        self.loginPage.do_login(
+            os.getenv('LOGIN_PLAYER'), os.getenv('PASSWORD'))
+        response = self.homePage.check_message(
+            os.getenv('FAN'), TestData.TEST_MESSAGE)
+        assert response["receiver"] == os.getenv(
+            'FAN') and response["message"] == TestData.TEST_MESSAGE
+        self.loginPage.do_logout()

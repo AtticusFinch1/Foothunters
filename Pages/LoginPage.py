@@ -11,6 +11,7 @@ class LoginPage(BasePage):
         time.sleep(2)
 
     def do_login(self, email, password):
+        time.sleep(2)
         self.do_send_keys(Login_locators.login_input, email)
         self.do_send_keys(Login_locators.password_input, password)
         self.do_click(Login_locators.register_login_button)
