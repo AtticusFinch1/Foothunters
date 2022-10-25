@@ -2,9 +2,12 @@ import pytest
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
+from Pages.LoginPage import LoginPage
+from Pages.HomePage import HomePage
 from webdriver_manager.chrome import ChromeDriverManager
 from Config.config import TestData
 from pyvirtualdisplay import Display
+import os
 
 
 @pytest.fixture(autouse=True, scope='class')
@@ -18,4 +21,8 @@ def init_driver(request):
     web_driver = webdriver.Chrome(
         service=Service(ChromeDriverManager().install()), options=options)
     request.cls.driver = web_driver
+    login_page = LoginPage(web_driver)
+    login_page.do_login(os.getenv('LOGIN_PLAYER'), os.getenv('PASSWORD'))
     yield
+    login_page.do_logout()
+    web_driver.quit()
