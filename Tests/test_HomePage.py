@@ -7,7 +7,6 @@ from Actions.GeneralActions import generalActions
 from Pages.HomePage import HomePage
 from Config.config import TestData
 
-
 from selenium.webdriver.common.by import By
 from dotenv import load_dotenv
 import os
@@ -42,6 +41,7 @@ class Test_HomePage(BaseTest):
     def test_search_profile(self):
         self.loginPage = LoginPage(self.driver)
         self.homePage = HomePage(self.driver)
+        time.sleep(2)
         self.loginPage.do_login(
             os.getenv('LOGIN_PLAYER'), os.getenv('PASSWORD'))
         BasePage.wait_for_page_load(
@@ -69,6 +69,7 @@ class Test_HomePage(BaseTest):
     def test_filter_profile(self):
         self.loginPage = LoginPage(self.driver)
         self.homePage = HomePage(self.driver)
+        time.sleep(2)
         self.loginPage.do_login(
             os.getenv('LOGIN_PLAYER'), os.getenv('PASSWORD'))
         BasePage.wait_for_page_load(
@@ -85,3 +86,35 @@ class Test_HomePage(BaseTest):
         print("players count expected", response)
         self.loginPage.do_logout()
         # assert players_count == response
+
+    def test_filter_profile_gender(self):
+        self.loginPage = LoginPage(self.driver)
+        self.homePage = HomePage(self.driver)
+        time.sleep(2)
+        self.loginPage.do_login(
+            os.getenv('LOGIN_PLAYER'), os.getenv('PASSWORD'))
+        BasePage.wait_for_page_load(
+            self, HomePage_locators.precense_of_home_page_el)
+        self.driver.get(TestData.BASE_URL + "players/")
+        time.sleep(1)
+        response = self.homePage.filter_profile_gender()
+        # assert response['players_male'] == response["players_found"][:2]
+        self.loginPage.do_logout()
+
+    def test_messenger(self):
+        self.loginPage = LoginPage(self.driver)
+        self.homePage = HomePage(self.driver)
+        time.sleep(2)
+        self.loginPage.do_login(os.getenv('LOGIN_FAN'), os.getenv('PASSWORD'))
+        BasePage.wait_for_page_load(
+            self, HomePage_locators.precense_of_home_page_el)
+        self.driver.get(TestData.BASE_URL + TestData.USERNAME_PLAYER)
+        self.homePage.send_message(TestData.TEST_MESSAGE)
+        self.driver.get(TestData.BASE_URL_LOGIN)
+        self.loginPage.do_login(
+            os.getenv('LOGIN_PLAYER'), os.getenv('PASSWORD'))
+        response = self.homePage.check_message(
+            os.getenv('FAN'), TestData.TEST_MESSAGE)
+        assert response["receiver"] == os.getenv(
+            'FAN') and response["message"] == TestData.TEST_MESSAGE
+        self.loginPage.do_logout()

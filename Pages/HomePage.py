@@ -6,6 +6,7 @@ from Actions.HomePage import ActionsHomePage
 from collections import Counter
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.keys import Keys
+import time
 
 class HomePage(BasePage):
     def __init__(self, driver):
@@ -43,3 +44,29 @@ class HomePage(BasePage):
         players_found = self.get_element_text(HomePage_locators.players_found)
         #unique_users = list({v["id"]:v for v in data_all}.values())
         return ({"players_male":gender_counter_male, "players_female":gender_counter_female, "players_found":players_found})
+
+    def send_message(self, message):
+        self.wait_for_page_load(self, HomePage_locators.start_chat_button)
+        self.do_click(HomePage_locators.start_chat_button)
+        self.wait_for_page_load(self, HomePage_locators.send_button)
+        self.do_send_keys(HomePage_locators.message_input, message)
+        self.do_click(HomePage_locators.send_button)
+
+    def check_message(self, rec, text_message):
+        time.sleep(40)
+        self.do_click(HomePage_locators.message_btn)
+        receivers_all = self.do_find_elements(HomePage_locators.message_receiver)        
+        receivers = [el.text for el in receivers_all]
+        messages_all = self.do_find_elements(HomePage_locators.message_content)
+        messages = [message.text for message in messages_all]
+        receiver_result = {}
+        message_result = {}
+        for receiver in receivers:
+            if receiver == rec:
+                receiver_result["receiver"]=receiver
+        for message in messages:
+            if message == text_message:
+                message_result["message"]=message                        
+        result = {**receiver_result, **message_result}
+        print(result)
+        return result
