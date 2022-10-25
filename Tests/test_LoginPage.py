@@ -15,10 +15,8 @@ class Test_LoginPage(BaseTest):
     def test_valid_login_player(self):
         self.loginPage=LoginPage(self.driver)
         self.loginPage.do_login(os.getenv('LOGIN_PLAYER'), os.getenv('PASSWORD'))
-        time.sleep(1)
-        self.loginPage.do_logout()
     @pytest.mark.parametrize('username, password, expected', [
-        pytest.param('', '', TestData.LOGIN_PAGE_ERROR_MESSAGE),
+        # pytest.param('', '', TestData.LOGIN_PAGE_ERROR_MESSAGE),
         # pytest.param('', TestData.PASSWORD, TestData.LOGIN_PAGE_ERROR_MESSAGE),
         # pytest.param(TestData.PLAYER_USERNAME, '', TestData.LOGIN_PAGE_ERROR_MESSAGE),
         pytest.param('test', TestData.PASSWORD, TestData.LOGIN_PAGE_ERROR_MESSAGE),
