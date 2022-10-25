@@ -12,10 +12,10 @@ class LoginPage(BasePage):
 
     def do_login(self, email, password):
         time.sleep(2)
-        self.do_send_keys(Login_locators.login_input, email)
-        self.do_send_keys(Login_locators.password_input, password)
-        self.do_click(Login_locators.register_login_button)
+        BasePage.do_send_keys(self, Login_locators.login_input, email)
+        BasePage.do_send_keys(self, Login_locators.password_input, password)
+        BasePage.do_click(self, Login_locators.register_login_button)
     
     def do_logout(self):
-        self.do_click(Login_locators.avatar_icon)
-        self.do_click(Login_locators.logout_btn)
+        BasePage.do_click(self, Login_locators.avatar_icon)
+        BasePage.do_click(self, Login_locators.logout_btn)
