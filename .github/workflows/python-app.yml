@@ -21,6 +21,7 @@ env:
 
   LOGIN_FAN : ${{ secrets.LOGIN_FAN }}
   FAN : ${{ secrets.FAN }}
+  FAN_USERNAME : ${{ secrets.FAN_USERNAME }}
   LOGIN_PLAYER : ${{ secrets.LOGIN_PLAYER }}
   PLAYER : ${{ secrets.PLAYER }}
   USERNAME_PLAYER : ${{ secrets.USERNAME_PLAYER }}
