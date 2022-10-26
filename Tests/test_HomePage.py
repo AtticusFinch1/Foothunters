@@ -90,4 +90,4 @@ class Test_HomePage(BaseTest):
         response = HomePage.check_message(
             self, os.getenv('PLAYER'), TestData.TEST_MESSAGE)
         assert response["receiver"] == os.getenv(
-            'FAN') and response["message"] == TestData.TEST_MESSAGE
+            'PLAYER') and response["message"] == TestData.TEST_MESSAGE
