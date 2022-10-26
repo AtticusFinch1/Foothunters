@@ -13,8 +13,8 @@ import os
 @pytest.fixture(autouse=True, scope='class')
 def init_driver(request):
     """ display and --headless is used only for github actions """
-    display = Display(visible=0, size=(800, 800))
-    display.start()
+    # display = Display(visible=0, size=(800, 800))
+    # display.start()
     options = Options()
     options.add_argument('--headless')
     options.add_argument('--disable-gpu')

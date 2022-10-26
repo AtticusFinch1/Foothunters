@@ -51,10 +51,10 @@ class HomePage_locators:
 
     # Chat
 
-    start_chat_button = (By.XPATH, "//span[normalize-space()='Start chat']")
+    # start_chat_button = (By.XPATH, "//span[normalize-space()='Start chat']")
     message_input = (By.XPATH, "//textarea[@placeholder='Message']")
-    send_button = (By.XPATH, "//button[@class='q-btn q-btn-item non-selectable no-outline q-btn--unelevated q-btn--round q-btn--actionable q-focusable q-hoverable q-btn--no-uppercase shadow-0 bg-white']//span[@class='q-btn__content text-center col items-center q-anchor--skip justify-center row']")
-    message_btn = (By.XPATH, "//span[normalize-space()='Messages']")
+    send_button = (By.XPATH, "//i[normalize-space()='send']")
+    message_btn = (By.XPATH, "//span[@class='block'][normalize-space()='Messages']")
     message_receiver = (By.CSS_SELECTOR, ".roomItem__name.text-body1")
     message_content = (By.CSS_SELECTOR, ".lastMessage__text.ellipsis")
 

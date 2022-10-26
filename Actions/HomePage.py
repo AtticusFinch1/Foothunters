@@ -11,7 +11,7 @@ import time
 class ActionsHomePage(BasePage):
     def send_notification(self, username):
         time.sleep(2)
-        self.driver.get(TestData.BASE_URL + username)
+        self.driver.get(TestData.BASE_URL + 'player/' + username)
         BasePage.do_click(self, HomePage_locators.like_btn)
         BasePage.do_click(self, HomePage_locators.follow_btn)
         LoginPage.do_logout(self)
