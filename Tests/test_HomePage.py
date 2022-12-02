@@ -18,20 +18,32 @@ import random
 class Test_HomePage(BaseTest):
     load_dotenv()
 
+    def test_messenger(self):
+        BasePage.wait_for_page_load(
+            self, HomePage_locators.precense_of_home_page_el)
+        self.driver.get(TestData.BASE_URL + 'messenger/' + TestData.USERNAME_FAN)
+        HomePage.send_message(self, TestData.TEST_MESSAGE)
+        LoginPage.do_logout(self)
+        time.sleep(2)
+        self.driver.get(TestData.BASE_URL+'login/')
+        time.sleep(2)
+        LoginPage.do_login(
+            self, os.getenv('LOGIN_FAN'), os.getenv('PASSWORD'))
+        response = HomePage.check_message(
+            self, os.getenv('PLAYER'), TestData.TEST_MESSAGE)
+        assert response["receiver"] == os.getenv(
+            'PLAYER') and response["message"] == TestData.TEST_MESSAGE
+
     def test_notification(self):
         BasePage.wait_for_page_load(
             self, HomePage_locators.precense_of_home_page_el)
-        HomePage.valid_notification(self, os.getenv('FAN_USERNAME'))
-        LoginPage.do_login(
-            self, os.getenv('LOGIN_FAN'), os.getenv('PASSWORD'))
-        time.sleep(2)
-        # follower_id = generalActions.get_user_id(
-        #     self, os.getenv('PLAYER_USERNAME'))
-        # fb_session_cookie = (self.driver.get_cookies())
-        # fb_cookie = json.dumps(fb_session_cookie[0]["value"])
-        # print(fb_cookie)
-        # followers_list = generalActions.get_followers_ids(self, fb_cookie)
-        # assert follower_id in followers_list 
+        try:
+            follower_count_before = generalActions.get_followers_count(self, os.getenv('FAN_USERNAME'))
+            HomePage.valid_notification(self, os.getenv('FAN_USERNAME'))
+            follower_count_after = generalActions.get_followers_count(self, os.getenv('FAN_USERNAME'))
+            assert (follower_count_after == follower_count_before + 1 or follower_count_after == follower_count_before - 1)
+        except:
+            print("Something Went Wrong")
 
     # Search player by username and compare with last name in search results
     def test_search_profile(self):
@@ -79,15 +91,4 @@ class Test_HomePage(BaseTest):
         response = HomePage.filter_profile_gender(self)
         # assert response['players_male'] == response["players_found"][:2]
 
-    def test_messenger(self):
-        BasePage.wait_for_page_load(
-            self, HomePage_locators.precense_of_home_page_el)
-        self.driver.get(TestData.BASE_URL + 'messenger/' + TestData.USERNAME_FAN)
-        HomePage.send_message(self, TestData.TEST_MESSAGE)
-        LoginPage.do_logout(self)
-        LoginPage.do_login(
-            self, os.getenv('LOGIN_FAN'), os.getenv('PASSWORD'))
-        response = HomePage.check_message(
-            self, os.getenv('PLAYER'), TestData.TEST_MESSAGE)
-        assert response["receiver"] == os.getenv(
-            'PLAYER') and response["message"] == TestData.TEST_MESSAGE
+
