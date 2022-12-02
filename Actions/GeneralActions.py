@@ -49,24 +49,15 @@ class generalActions():
         print(response.json()["player"]["id"])
         return response.json()["player"]["id"]
 
-    def get_followers_ids(self, fb_cookie):
-        cookie = {"fb_session": fb_cookie}
-        id_notifications = []
-        r = requests.get(TestData.BASE_URL + 'api/user/notifications',
-                         cookies=cookie, verify=False)
-        print(r)
-        for i in range(len(r.json()["notifications"]["data"])):
-            try:
-                notification_mode = (
-                    r.json()["notifications"]["data"][i]["data"]["mode"])
-                if notification_mode == "follow":
-                    follower_id = (
-                        r.json()["notifications"]["data"][i]["data"]["user_id"])
-                    id_notifications.append(follower_id)
-            except KeyError:
-                print("No such key")
-            return id_notifications
-
+    def get_followers_count(self, username):
+        payload = {
+            'username':username
+        }
+        response = requests.post('https://dev.foothunters.com/api/players/get', data=payload)
+        player = response.json()["player"]
+        follower_count = (player["followers_count"])
+        return follower_count        
+        
     def new_players_all(self):
         response = requests.post(
             TestData.BASE_URL + "api/app/present", verify=False)

@@ -10,7 +10,7 @@ from pyvirtualdisplay import Display
 import os
 
 
-@pytest.fixture(autouse=True, scope='class')
+@pytest.fixture(autouse=True, scope='function')
 def init_driver(request):
     """ display and --headless is used only for github actions """
     # display = Display(visible=0, size=(800, 800))
@@ -24,5 +24,5 @@ def init_driver(request):
     login_page = LoginPage(web_driver)
     login_page.do_login(os.getenv('LOGIN_PLAYER'), os.getenv('PASSWORD'))
     yield
-    login_page.do_logout()
+    # login_page.do_logout()
     web_driver.quit()

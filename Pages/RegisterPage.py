@@ -23,7 +23,6 @@ class RegisterPage(BasePage):
         last_name = request['last_name']
         email = request['email']
         password = request['password']
-        re_password = request['password']
         self.do_click(Register_locators.name_input)        
         self.do_send_keys(Register_locators.name_input, first_name)
         self.do_click(Register_locators.surname_input)
@@ -32,10 +31,8 @@ class RegisterPage(BasePage):
         self.do_send_keys(Register_locators.email_input, email)
         self.do_click(Register_locators.password_input)
         self.do_send_keys(Register_locators.password_input, password)
-        self.do_click(Register_locators.confirm_pass_inp)
-        self.do_send_keys(Register_locators.confirm_pass_inp, re_password)
         self.do_click(Register_locators.next_button)
-        time.sleep(50)
+        time.sleep(30)
         inbox = generalActions.get_inbox()
         self.driver.get(inbox[0])
         time.sleep(2)
