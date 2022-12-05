@@ -42,16 +42,15 @@ class HomePage(BasePage):
         return ({"players_male":gender_counter_male, "players_female":gender_counter_female, "players_found":players_found})
 
     def send_message(self, message):
-
-        BasePage.wait_for_page_load(self, HomePage_locators.start_chat_button)
-        BasePage.do_click(self, HomePage_locators.start_chat_button)
-        BasePage.wait_for_page_load(self, HomePage_locators.send_button)
+        time.sleep(10)
+        print(self.driver.current_url)
         BasePage.do_send_keys(self, HomePage_locators.message_input, message)
         BasePage.do_click(self, HomePage_locators.send_button)
 
     def check_message(self, rec, text_message):
-        time.sleep(40)
-        BasePage.do_click(self, HomePage_locators.message_btn)
+        time.sleep(5)
+        self.driver.get(TestData.BASE_URL + 'messenger/')
+        print(self.driver.current_url)
         receivers_all = BasePage.do_find_elements(self, HomePage_locators.message_receiver)        
         receivers = [el.text for el in receivers_all]
         messages_all = BasePage.do_find_elements(self, HomePage_locators.message_content)

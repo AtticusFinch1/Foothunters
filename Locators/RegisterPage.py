@@ -6,14 +6,14 @@ class Register_locators:
     email_input = (By.XPATH,"//input[@aria-label='Email']")
     password_input = (By.XPATH,"//input[@aria-label='Password']")
     confirm_pass_inp = (By.XPATH,"//input[@aria-label='Password confirmation']")
-    next_button = (By.XPATH, "//span[contains(@class,'block')]")
+    next_button = (By.XPATH, "//button[@class='q-btn q-btn-item non-selectable no-outline q-btn--standard q-btn--rectangle bg-primary text-white q-btn--actionable q-focusable q-hoverable q-btn--no-uppercase q-ml-auto']")
 
     who_am_i = (By.XPATH,"//span[normalize-space()='Fan']")
     role_picker_fun = (By.XPATH, "//div[contains(@class,'q-item__label')]//span[contains(text(),'Fan')]")
     role_picker_player = (By.XPATH, "//div[contains(@class,'q-item__label')]//span[contains(text(),'Player')]")
     username_input = (By.XPATH, "//input[contains(@aria-label,'Username')]")
     phone_input = (By.XPATH, "//input[@aria-label='Phone']")
-    next_fan_finish = (By.XPATH, "//button[@type='button']")
+    next_fan_finish = (By.CSS_SELECTOR, ".q-btn.q-btn-item.non-selectable.no-outline.q-btn--standard.q-btn--rectangle.bg-primary.text-white.q-btn--actionable.q-focusable.q-hoverable.q-btn--no-uppercase")
 
     gender_picker = (By.XPATH, "//div[@aria-label='Gender']")
     gender_male = (By.XPATH, "//div[@class='q-item__label'])[1]")
