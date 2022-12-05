@@ -63,5 +63,5 @@ class HomePage(BasePage):
             if message == text_message:
                 message_result["message"]=message   
         result = {**receiver_result, **message_result}
-        print('receiver_result', receiver_result)
+        print(result)
         return result

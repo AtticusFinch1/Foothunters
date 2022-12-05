@@ -17,7 +17,7 @@ class BasePage(TestData):
     def do_click(self,by_locator):
         try:
             element=WebDriverWait(self.driver, 20).until(
-                EC.visibility_of_element_located(by_locator)  
+                    EC.visibility_of_element_located(by_locator)  
             )
             return element.click()
         except NoSuchElementException:
@@ -34,7 +34,7 @@ class BasePage(TestData):
 
     def do_send_keys(self,by_locator,text):
         try:
-            element=WebDriverWait(self.driver, 20).until(
+            element=WebDriverWait(self.driver, 40).until(
                     EC.visibility_of_element_located(by_locator)
                 )
             return element.send_keys(text)

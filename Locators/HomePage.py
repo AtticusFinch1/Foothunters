@@ -58,4 +58,4 @@ class HomePage_locators:
     message_btn = (By.CSS_SELECTOR, "button[data-id='message-button']")
     message_receiver = (By.CSS_SELECTOR, ".roomItem__name.text-body1")
     message_content = (By.CSS_SELECTOR, ".lastMessage__text.ellipsis")
-    
+
