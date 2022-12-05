@@ -21,7 +21,7 @@ class Test_HomePage(BaseTest):
     def test_messenger(self):
         BasePage.wait_for_page_load(
             self, HomePage_locators.precense_of_home_page_el)
-        self.driver.get(TestData.BASE_URL + 'messenger/' + TestData.USERNAME_FAN)
+        self.driver.get(TestData.BASE_URL + 'messenger/lewowi')
         HomePage.send_message(self, TestData.TEST_MESSAGE)
         LoginPage.do_logout(self)
         self.loginPage = LoginPage(self.driver)
