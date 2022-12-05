@@ -13,6 +13,7 @@ class TestData:
     FILE_PATH = (os.getenv('FILE_PATH'))
 
     USERNAME_PLAYER = os.getenv("USERNAME_PLAYER")
+    PLAYER = os.getenv("PLAYER")
     USERNAME_FAN = os.getenv('FAN_USERNAME')
     PLAYER_USERNAME = os.getenv("PLAYER_USERNAME")
     PASSWORD = os.getenv("PASSWORD")
