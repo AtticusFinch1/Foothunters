@@ -50,6 +50,7 @@ class HomePage(BasePage):
     def check_message(self, rec, text_message):
         time.sleep(10)
         self.driver.get(TestData.BASE_URL + 'messenger')
+        print(self.driver.current_url)
         receivers_all = BasePage.do_find_elements(self, HomePage_locators.message_receiver)        
         receivers = [el.text for el in receivers_all]
         messages_all = BasePage.do_find_elements(self, HomePage_locators.message_content)
