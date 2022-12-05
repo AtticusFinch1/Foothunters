@@ -27,7 +27,7 @@ class Test_HomePage(BaseTest):
         self.loginPage = LoginPage(self.driver)
         self.loginPage.do_login(TestData.USERNAME_FAN, TestData.PASSWORD)
         response = HomePage.check_message(
-            self, os.getenv('PLAYER'), TestData.TEST_MESSAGE)
+            self, TestData.PLAYER, TestData.TEST_MESSAGE)
         assert response["receiver"] == os.getenv(
             'PLAYER') and response["message"] == TestData.TEST_MESSAGEE
 
