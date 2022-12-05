@@ -28,8 +28,7 @@ class Test_HomePage(BaseTest):
         self.loginPage.do_login(os.getenv('LOGIN_FAN'), TestData.PASSWORD)
         response = HomePage.check_message(
             self, os.getenv('PLAYER'), TestData.TEST_MESSAGE)
-        assert response["receiver"] == os.getenv(
-            'PLAYER') and response["message"] == TestData.TEST_MESSAGEE
+        assert response["message"] == TestData.TEST_MESSAGEE
 
 #     def test_notification(self):
 #         BasePage.wait_for_page_load(
