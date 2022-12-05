@@ -43,7 +43,7 @@ class HomePage(BasePage):
 
     def send_message(self, message):
         time.sleep(10)
-        print(self.driver.get_url)
+        print(self.driver.current_url)
         BasePage.do_send_keys(self, HomePage_locators.message_input, message)
         BasePage.do_click(self, HomePage_locators.send_button)
 
