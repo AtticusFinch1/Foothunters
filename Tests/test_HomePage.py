@@ -21,18 +21,14 @@ class Test_HomePage(BaseTest):
     def test_messenger(self):
         BasePage.wait_for_page_load(
             self, HomePage_locators.precense_of_home_page_el)
-        self.driver.get(TestData.BASE_URL + 'messenger/' + TestData.USERNAME_FAN)
+        self.driver.get(TestData.BASE_URL + 'messenger/lewowi')
         HomePage.send_message(self, TestData.TEST_MESSAGE)
         LoginPage.do_logout(self)
-        time.sleep(2)
-        self.driver.get(TestData.BASE_URL+'login/')
-        time.sleep(2)
-        LoginPage.do_login(
-            self, os.getenv('LOGIN_FAN'), os.getenv('PASSWORD'))
+        self.loginPage = LoginPage(self.driver)
+        self.loginPage.do_login(TestData.USERNAME_FAN, TestData.PASSWORD)
         response = HomePage.check_message(
             self, os.getenv('PLAYER'), TestData.TEST_MESSAGE)
-        assert response["receiver"] == os.getenv(
-            'PLAYER') and response["message"] == TestData.TEST_MESSAGE
+        assert response["message"] == TestData.TEST_MESSAGE
 
     def test_notification(self):
         BasePage.wait_for_page_load(

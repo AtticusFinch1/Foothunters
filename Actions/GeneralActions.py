@@ -53,7 +53,7 @@ class generalActions():
         payload = {
             'username':username
         }
-        response = requests.post('https://dev.foothunters.com/api/players/get', data=payload)
+        response = requests.post(TestData.BASE_URL + 'api/players/get', data=payload)
         player = response.json()["player"]
         follower_count = (player["followers_count"])
         return follower_count        
@@ -68,5 +68,24 @@ class generalActions():
             lastName = (new_users[i]["profile"]["lastName"])
             new_users_list[username] = lastName
         return new_users_list
+    
+    def get_gifts(self):
+        data = {}
+        response = requests.get(
+            TestData.BASE_URL + "api/gifts/", verify=False
+        )
+        gifts = response.json()        
+        gift_list = {}
+        data["gifts_total"] = gifts["gifts"]["total"]
+        for item in gifts["gifts"]["data"]:
+            if item["in_stock"] == 0:
+                gift_list["out_of_stock"] = item["id"]            
+        data["gifts_data"] = gift_list
+        return data
+
+
+    
+
+
 
     
