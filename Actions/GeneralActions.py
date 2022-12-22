@@ -18,7 +18,6 @@ class generalActions():
             data['first_name'] = first_name
             data['last_name'] = last_name
             data['company_name'] = company_name
-            data['password'] = 'password'
             print('Current E-Mail: '+email+'\n'+'First & Last Name: ' +
                   first_name+' '+last_name+'\n'+'Company Name: '+company_name)
         return data
@@ -36,7 +35,7 @@ class generalActions():
             regex = r"(?i)\b((?:https?://|www\d{0,3}[.]|[a-z0-9.\-]+[.][a-z]{2,4}/)(?:[^\s()<>]+|\(([^\s()<>]+|(\([^\s()<>]+\)))*\))+(?:\(([^\s()<>]+|(\([^\s()<>]+\)))*\)|[^\s`!()\[\]{};:'\".,<>?«»“”‘’]))"
             url = re.findall(regex, clean_body)
             mail = [x[0] for x in url]
-        return mail
+            return mail
         s(3)
 
     def get_user_id(self, username):
