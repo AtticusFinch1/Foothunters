@@ -3,6 +3,9 @@ from minuteinbox import create_email, get_inbox
 from time import sleep as s
 import re
 import requests
+import asyncio
+import logging
+from xtempmail.aiomail import EMAIL, EmailMessage, Email
 
 
 class generalActions():
@@ -18,10 +21,10 @@ class generalActions():
             data['first_name'] = first_name
             data['last_name'] = last_name
             data['company_name'] = company_name
+            data['password'] = 'password'
             print('Current E-Mail: '+email+'\n'+'First & Last Name: ' +
                   first_name+' '+last_name+'\n'+'Company Name: '+company_name)
         return data
-        # get received email body
 
     def get_inbox():
         inbox = get_inbox()
