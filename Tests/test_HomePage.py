@@ -10,6 +10,7 @@ from Config.config import TestData
 from selenium.webdriver.common.by import By
 from dotenv import load_dotenv
 import os
+import calendar
 import time
 import json
 import random
@@ -22,13 +23,16 @@ class Test_HomePage(BaseTest):
         BasePage.wait_for_page_load(
             self, HomePage_locators.precense_of_home_page_el)
         self.driver.get(TestData.BASE_URL + 'messenger/lewowi')
-        HomePage.send_message(self, TestData.TEST_MESSAGE)
+        current_GMT = time.gmtime()
+        date_now = calendar.timegm(current_GMT)
+        test_message = " ".join([TestData.TEST_MESSAGE, str(date_now)])
+        HomePage.send_message(self, test_message)
         LoginPage.do_logout(self)
         self.loginPage = LoginPage(self.driver)
-        self.loginPage.do_login(os.getenv('LOGIN_FAN'), TestData.PASSWORD)
+        self.loginPage.do_login(os.getenv('LOGIN_FAN'), os.getenv('PASSWORD'))
         response = HomePage.check_message(
-            self, os.getenv('PLAYER'), TestData.TEST_MESSAGE)
-        assert response["message"] == TestData.TEST_MESSAGE
+            self, os.getenv('PLAYER'), test_message)
+        assert response["message"] == test_message
 
     def test_notification(self):
         BasePage.wait_for_page_load(

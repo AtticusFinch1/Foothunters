@@ -8,12 +8,20 @@ class Register_locators:
     confirm_pass_inp = (By.XPATH,"//input[@aria-label='Password confirmation']")
     next_button = (By.XPATH, "//button[@class='q-btn q-btn-item non-selectable no-outline q-btn--standard q-btn--rectangle bg-primary text-white q-btn--actionable q-focusable q-hoverable q-btn--no-uppercase q-ml-auto']")
 
+    age_picker = (By.XPATH, "//span[normalize-space()='18']")
     who_am_i = (By.XPATH,"//span[normalize-space()='Fan']")
-    role_picker_fun = (By.XPATH, "//div[contains(@class,'q-item__label')]//span[contains(text(),'Fan')]")
-    role_picker_player = (By.XPATH, "//div[contains(@class,'q-item__label')]//span[contains(text(),'Player')]")
+    who_am_i_player = (By.XPATH,"//span[normalize-space()='Player']")
+    def role_picker_global(state): 
+        return (By.XPATH, "//div[contains(@class,'q-item__label')]//span[contains(text(),'%s')]"% str(state))
     username_input = (By.XPATH, "//input[contains(@aria-label,'Username')]")
     phone_input = (By.XPATH, "//input[@aria-label='Phone']")
     next_fan_finish = (By.CSS_SELECTOR, ".q-btn.q-btn-item.non-selectable.no-outline.q-btn--standard.q-btn--rectangle.bg-primary.text-white.q-btn--actionable.q-focusable.q-hoverable.q-btn--no-uppercase")
+
+    # delete account
+    del_account_btn = (By.XPATH, "//span[normalize-space()='Delete Account']")
+    del_confirm_input = (By.XPATH, "//input[@aria-label='Password']")
+    del_confirm_btn = (By.XPATH, "(//span[@class='block'][normalize-space()='Delete Account'])[2]")
+
 
     gender_picker = (By.XPATH, "//div[@aria-label='Gender']")
     gender_male = (By.XPATH, "//div[@class='q-item__label'])[1]")

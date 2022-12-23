@@ -3,6 +3,9 @@ from minuteinbox import create_email, get_inbox
 from time import sleep as s
 import re
 import requests
+import asyncio
+import logging
+from xtempmail.aiomail import EMAIL, EmailMessage, Email
 
 
 class generalActions():
@@ -22,7 +25,6 @@ class generalActions():
             print('Current E-Mail: '+email+'\n'+'First & Last Name: ' +
                   first_name+' '+last_name+'\n'+'Company Name: '+company_name)
         return data
-        # get received email body
 
     def get_inbox():
         inbox = get_inbox()
@@ -36,7 +38,7 @@ class generalActions():
             regex = r"(?i)\b((?:https?://|www\d{0,3}[.]|[a-z0-9.\-]+[.][a-z]{2,4}/)(?:[^\s()<>]+|\(([^\s()<>]+|(\([^\s()<>]+\)))*\))+(?:\(([^\s()<>]+|(\([^\s()<>]+\)))*\)|[^\s`!()\[\]{};:'\".,<>?«»“”‘’]))"
             url = re.findall(regex, clean_body)
             mail = [x[0] for x in url]
-        return mail
+            return mail
         s(3)
 
     def get_user_id(self, username):

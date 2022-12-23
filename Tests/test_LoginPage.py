@@ -9,7 +9,8 @@ from dotenv import load_dotenv
 
 class Test_LoginPage(BaseTest):
     load_dotenv()
-    @pytest.mark.parametrize('username, password, expected', [
+    @pytest.mark.parametrize('username, password, expected', 
+    [
         # pytest.param('', '', TestData.LOGIN_PAGE_ERROR_MESSAGE),
         # pytest.param('', TestData.PASSWORD, TestData.LOGIN_PAGE_ERROR_MESSAGE),
         # pytest.param(TestData.PLAYER_USERNAME, '', TestData.LOGIN_PAGE_ERROR_MESSAGE),
