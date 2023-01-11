@@ -78,6 +78,16 @@ class BasePage(TestData):
         actions = ActionChains(self.driver)
         element=WebDriverWait(self.driver,10).until(EC.visibility_of_element_located(by_locator))
         actions.move_to_element(element).perform()
+    
+    def do_get_attribute(self, by_locator, attribute):
+        try:
+            element=WebDriverWait(self.driver, 20).until(
+                    EC.visibility_of_element_located(by_locator))
+            return element.get_attribute(attribute)
+        except ElementNotVisibleException:
+            print("Element is not visible")
+
+
 
     @contextmanager
     def wait_for_page_load(self, element, timeout=20):

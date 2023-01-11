@@ -36,11 +36,49 @@ class RegisterPage(BasePage):
         self.do_click(Register_locators.next_button)
         time.sleep(30)
     
+    def valid_register_parental(self, parent_first_name, last_name, kid_first_name, email, password):
+        self.do_click(Register_locators.name_input)
+        self.do_send_keys(Register_locators.name_input, kid_first_name)
+        self.do_click(Register_locators.surname_input)
+        self.do_send_keys(Register_locators.surname_input, last_name)
+        self.do_click(Register_locators.parentName_input)
+        self.do_send_keys(Register_locators.parentName_input, parent_first_name)
+        self.do_click(Register_locators.parentLastName_input)
+        self.do_send_keys(Register_locators.parentLastName_input, last_name)
+        self.do_click(Register_locators.parentEmail_input)
+        self.do_send_keys(Register_locators.parentEmail_input, email)
+        self.do_click(Register_locators.password_input)
+        self.do_send_keys(Register_locators.password_input, password)
+        self.do_click(Register_locators.next_button)
+        time.sleep(30)
+
     def delete_account(self):
         self.driver.get(TestData.BASE_URL + "settings/security")
         self.do_click(Register_locators.del_account_btn)
         self.do_send_keys(Register_locators.del_confirm_input, os.getenv("PASSWORD"))
         self.do_click(Register_locators.del_confirm_btn)
+
+    def fill_completeness_bar_profile(self):
+        ActionsPageRegister.visit_profile(self)
+        progress_initial = self.do_get_attribute(Register_locators.progress_filled, "style")
+        self.driver.get(TestData.BASE_URL + "settings")
+        ActionsPageRegister.fill_completeness_bar_profile(self)
+        ActionsPageRegister.visit_profile(self)
+        progress_second = self.do_get_attribute(Register_locators.progress_filled, "style")
+        data = { "progress_initial":progress_initial, "progress_second":progress_second }
+        return data
+
+    def upload_fill_complit_bar(self, logic):
+        logic()
+        progress_global = self.do_get_attribute(Register_locators.progress_filled, "style")
+        return {"progress_global":progress_global}
+        
+
+
+        
+
+
+
 
 
     

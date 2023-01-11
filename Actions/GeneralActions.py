@@ -6,9 +6,19 @@ import requests
 import asyncio
 import logging
 from xtempmail.aiomail import EMAIL, EmailMessage, Email
+from faker import Faker
+import requests,json,random,re
 
 
 class generalActions():
+    def fake_data():
+        fake = Faker()
+        fake_name = fake.name()
+        fake_address = fake.address()
+        company_suffix=['Solutions','Software Inc.','Technology Inc.','Technologies','Computers','Systems','IT','Connect','Digital','Tech','PC Professionals','Technology Partners','Group','Tech Services','& Co','Labs','PLLC','Tech','Corp.','LLC','LLP','LP','P.C','Incorporated','S.A.S.','GmbH & Co. KG','AG & Co. KG','SE & Co. KGaA']
+        company_name=str(fake_address[1][:random.randint(2,5)].capitalize()+fake_name[0][:2]+' '+random.choice(company_suffix))
+        data = {'fake_name':fake_name, 'fake_address':fake_address, 'company_name':company_name}
+        return data
     def create_new_email():
         minuteinbox = create_email()
         data = {}
@@ -21,7 +31,6 @@ class generalActions():
             data['first_name'] = first_name
             data['last_name'] = last_name
             data['company_name'] = company_name
-            data['password'] = 'password'
             print('Current E-Mail: '+email+'\n'+'First & Last Name: ' +
                   first_name+' '+last_name+'\n'+'Company Name: '+company_name)
         return data
